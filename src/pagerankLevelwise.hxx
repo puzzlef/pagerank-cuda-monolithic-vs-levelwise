@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <algorithm>
+#include <utility>
 #include "vertices.hxx"
 #include "edges.hxx"
 #include "csr.hxx"
@@ -10,6 +11,7 @@
 #include "pagerank.hxx"
 #include "pagerankMonolithic.hxx"
 
+using std::pair;
 using std::vector;
 using std::swap;
 
@@ -18,8 +20,10 @@ using std::swap;
 
 template <class G, class H, class T>
 auto pagerankComponents(const G& x, const H& xt, const PagerankOptions<T>& o) {
-  auto a = joinUntilSize(components(x, xt), o.minComponentSize);
-  auto b = blockgraph(x, a);
+  auto a  = joinUntilSize(components(x, xt), o.minComponentSize);
+  auto fp = [&](int u) { return xt.degree(u) < PAGERANK_SWITCH_DEGREE; };
+  for (const auto& c : a) partition(c.begin(), c.end(), fp);
+  auto b   = blockgraph(x, a);
   auto bks = topologicalSort(b);
   reorder(a, bks);
   return a;
@@ -27,7 +31,7 @@ auto pagerankComponents(const G& x, const H& xt, const PagerankOptions<T>& o) {
 
 
 template <class G, class H, class C>
-auto pagerankComponentSizes(const G& w, const H& wt, const C& wcs, const G& x, const H& xt, const C& xcs) {
+auto pagerankComponentWaves(const G& w, const H& wt, const C& wcs, const G& x, const H& xt, const C& xcs) {
   int W = wcs.size();
   int X = xcs.size();
   auto b = blockgraph(x, xcs);
@@ -37,23 +41,26 @@ auto pagerankComponentSizes(const G& w, const H& wt, const C& wcs, const G& x, c
     if (findIndex(wcs, xcs[u])>=0 && componentsEqual(w, wt, xcs[u], x, xt, xcs[u])) continue;
     dfsDo(b, u, [&](int v) { dirty[v] = true; });
   }
-  vector<int> a(X);
-  for (int i=0; i<X; i++)
-    a[i] = dirty[i]? xcs[i].size() : -xcs[i].size();
+  vector<pair<int, vector<int>>> a;
+  for (int i=0; i<X; i++) {
+    int n = xcs[i].size();
+    a.push_back({dirty[i]? n:-n, pagerankWave(xt, xcs[i])});
+  }
   return a;
 }
 
 
 template <class T, class J>
-int pagerankLevelwiseLoop(vector<T>& a, vector<T>& r, vector<T>& c, const vector<T>& f, const vector<int>& vfrom, const vector<int>& efrom, const vector<int>& vdata, J&& ns, int N, T p, T E, int L) {
-  int v = 0; float l = 0;
-  for (int n : ns) {
-    if (n<0) { v += -n; continue; }
-    l += pagerankMonolithicLoop(a, r, c, f, vfrom, efrom, vdata, v, v+n, N, p, E * (float(n)/N), L) * (float(n)/N);
-    swap(a, r);
-    v += n;
+int pagerankLevelwiseLoop(T *e, T *r0, T *eD, T *r0D, T *&aD, T *&rD, T *cD, const T *fD, const int *vfromD, const int *efromD, const int *vdataD, int i, J&& ws, int N, T p, T E, int L) {
+  float l = 0;
+  for (const auto& w : ws) {
+    int n = w.first; const auto& ns = w.second;
+    if (n<0) { i += -n; continue; }
+    l += pagerankMonolithicLoop(e, r0, eD, r0D, aD, rD, cD, fD, vfromD, efromD, vdataD, i, ns, N, p, E * (float(n)/N), L) * (float(n)/N);
+    swap(aD, rD);
+    i += n;
   }
-  swap(a, r);
+  swap(aD, rD);
   return int(l);
 }
 
@@ -72,22 +79,63 @@ PagerankResult<T> pagerankLevelwise(const G& w, const H& wt, const G& x, const H
   T    E = o.tolerance;
   int  L = o.maxIterations, l;
   int  N = xt.order();
+  int  R = reduceSizeCu(N);
   auto wcs = pagerankComponents(w, wt, o);
   auto xcs = pagerankComponents(x, xt, o);
-  auto ns = pagerankComponentSizes(w, wt, wcs, x, xt, xcs);
+  auto ws = pagerankComponentWaves(w, wt, wcs, x, xt, xcs);
   auto ks = join(xcs);
   auto vfrom = sourceOffsets(xt, ks);
   auto efrom = destinationIndices(xt, ks);
   auto vdata = vertexData(xt, ks);
-  vector<T> a(N), r(N), c(N), f(N), qc;
-  if (q) qc = compressContainer(xt, *q, ks);
+  int VFROM1 = vfrom.size() * sizeof(int);
+  int EFROM1 = efrom.size() * sizeof(int);
+  int VDATA1 = vdata.size() * sizeof(int);
+  int N1 = N * sizeof(T);
+  int R1 = R * sizeof(T);
+  vector<T> a(N), r(N);
+
+  T *e,  *r0;
+  T *eD, *r0D, *fD, *rD, *cD, *aD;
+  int *vfromD, *efromD, *vdataD;
+  // TRY( cudaProfilerStart() );
+  TRY( cudaSetDeviceFlags(cudaDeviceMapHost) );
+  TRY( cudaHostAlloc(&e,  R1, cudaHostAllocDefault) );
+  TRY( cudaHostAlloc(&r0, R1, cudaHostAllocDefault) );
+  TRY( cudaMalloc(&eD,  R1) );
+  TRY( cudaMalloc(&r0D, R1) );
+  TRY( cudaMalloc(&aD, N1) );
+  TRY( cudaMalloc(&rD, N1) );
+  TRY( cudaMalloc(&cD, N1) );
+  TRY( cudaMalloc(&fD, N1) );
+  TRY( cudaMalloc(&vfromD, VFROM1) );
+  TRY( cudaMalloc(&efromD, EFROM1) );
+  TRY( cudaMalloc(&vdataD, VDATA1) );
+  TRY( cudaMemcpy(vfromD, vfrom.data(), VFROM1, cudaMemcpyHostToDevice) );
+  TRY( cudaMemcpy(efromD, efrom.data(), EFROM1, cudaMemcpyHostToDevice) );
+  TRY( cudaMemcpy(vdataD, vdata.data(), VDATA1, cudaMemcpyHostToDevice) );
+
   float t = measureDurationMarked([&](auto mark) {
-    fill(a, T());
-    if (q) copy(r, qc);
+    if (q) r = compressContainer(xt, *q, ks);
     else fill(r, T(1)/N);
-    mark([&] { pagerankFactor(f, vfrom, efrom, vdata, 0, N, N, p); multiply(c, r, f); copy(a, r); });
-    mark([&] { l = pagerankLevelwiseLoop(a, r, c, f, vfrom, efrom, vdata, ns, N, p, E, L); });
+    TRY( cudaMemcpy(aD, a.data(), N1, cudaMemcpyHostToDevice) );
+    TRY( cudaMemcpy(rD, r.data(), N1, cudaMemcpyHostToDevice) );
+    mark([&] { pagerankFactorCu(fD, vdataD, 0, N, p); });
+    mark([&] { l = pagerankLevelwiseLoop(e, r0, eD, r0D, aD, rD, cD, fD, vfromD, efromD, vdataD, 0, ws, N, p, E, L); });
   }, o.repeat);
+  TRY( cudaMemcpy(a.data(), aD, N1, cudaMemcpyDeviceToHost) );
+
+  TRY( cudaFreeHost(e) );
+  TRY( cudaFreeHost(r0) );
+  TRY( cudaFree(eD) );
+  TRY( cudaFree(r0D) );
+  TRY( cudaFree(aD) );
+  TRY( cudaFree(rD) );
+  TRY( cudaFree(cD) );
+  TRY( cudaFree(fD) );
+  TRY( cudaFree(vfromD) );
+  TRY( cudaFree(efromD) );
+  TRY( cudaFree(vdataD) );
+  // TRY( cudaProfilerStop() );
   return {decompressContainer(xt, a, ks), l, t};
 }
 

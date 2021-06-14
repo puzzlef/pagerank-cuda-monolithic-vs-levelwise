@@ -113,10 +113,10 @@ void pagerankSwitchedCu(T *a, const T *r, const T *c, const int *vfrom, const in
   }
 }
 
-template <class G, class T=float>
-int pagerankSwitchPoint(const G& xt) {
-  int a = countIf(xt.vertices(), [&](int u) { return xt.degree(u) < PAGERANK_SWITCH_DEGREE; });
-  int L = PAGERANK_SWITCH_LIMIT, N = xt.order();
+template <class G, class J>
+int pagerankSwitchPoint(const G& xt, J&& ks) {
+  int a = countIf(ks, [&](int u) { return xt.degree(u) < PAGERANK_SWITCH_DEGREE; });
+  int L = PAGERANK_SWITCH_LIMIT, N = ks.size();
   return a<L? 0 : (N-a<L? N : a);
 }
 
@@ -125,11 +125,11 @@ void pagerankAddStep(vector<int>& a, int n) {
   else a.back() += n;
 }
 
-template <class G, class T=float>
-auto pagerankWave(const G& xt) {
+template <class G, class J>
+auto pagerankWave(const G& xt, J&& ks) {
   vector<int> a;
-  int N = xt.order();
-  int s = pagerankSwitchPoint(xt);
+  int N = ks.size();
+  int s = pagerankSwitchPoint(xt, ks);
   if (s)   pagerankAddStep(a,  -s);
   if (N-s) pagerankAddStep(a, N-s);
   return a;
@@ -177,8 +177,8 @@ PagerankResult<T> pagerankMonolithic(H& xt, const vector<T> *q=nullptr, Pagerank
   auto fp  = [&](auto ib, auto ie) {
     partition(ib, ie, [&](int u) { return xt.degree(u) < PAGERANK_SWITCH_DEGREE; });
   };
-  auto ns    = pagerankWave(xt);
   auto ks    = vertices(xt, fm, fp);
+  auto ns    = pagerankWave(xt, ks);
   auto vfrom = sourceOffsets(xt, ks);
   auto efrom = destinationIndices(xt, ks);
   auto vdata = vertexData(xt, ks);

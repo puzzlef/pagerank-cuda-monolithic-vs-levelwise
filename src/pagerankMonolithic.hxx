@@ -149,9 +149,9 @@ int pagerankMonolithicLoop(T *e, T *r0, T *eD, T *r0D, T *&aD, T *&rD, T *cD, co
   T c0 = (1-p)/N;
   int l = 1;
   for (; l<L; l++) {
-    multiplyCu(cD, rD, fD, n);
+    multiplyCu(cD+i, rD+i, fD+i, n);
     pagerankSwitchedCu(aD, rD, cD, vfromD, efromD, i, ns, c0);
-    l1NormCu(eD, rD, aD, n);
+    l1NormCu(eD, rD+i, aD+i, n);
     TRY( cudaMemcpy(e, eD, R1, cudaMemcpyDeviceToHost) );
     T e1 = sum(e, R);
     if (e1 < E) break;
@@ -167,7 +167,7 @@ int pagerankMonolithicLoop(T *e, T *r0, T *eD, T *r0D, T *&aD, T *&rD, T *cD, co
 // @param o options {damping=0.85, tolerance=1e-6, maxIterations=500}
 // @returns {ranks, iterations, time}
 template <class H, class T=float>
-PagerankResult<T> pagerankMonolithic(H& xt, const vector<T> *q=nullptr, PagerankOptions<T> o=PagerankOptions<T>()) {
+PagerankResult<T> pagerankMonolithic(const H& xt, const vector<T> *q=nullptr, PagerankOptions<T> o=PagerankOptions<T>()) {
   T    p   = o.damping;
   T    E   = o.tolerance;
   int  L   = o.maxIterations, l;

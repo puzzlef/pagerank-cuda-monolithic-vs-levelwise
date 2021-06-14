@@ -10,5 +10,6 @@
 #include "deadEnds.hxx"
 #include "mtx.hxx"
 #include "pagerank.hxx"
+#include "pagerankNvgraph.hxx"
 #include "pagerankMonolithic.hxx"
 #include "pagerankLevelwise.hxx"

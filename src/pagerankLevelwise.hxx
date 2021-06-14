@@ -22,7 +22,7 @@ template <class G, class H, class T>
 auto pagerankComponents(const G& x, const H& xt, const PagerankOptions<T>& o) {
   auto a  = joinUntilSize(components(x, xt), o.minComponentSize);
   auto fp = [&](int u) { return xt.degree(u) < PAGERANK_SWITCH_DEGREE; };
-  for (const auto& c : a) partition(c.begin(), c.end(), fp);
+  for (auto& c : a) partition(c.begin(), c.end(), fp);
   auto b   = blockgraph(x, a);
   auto bks = topologicalSort(b);
   reorder(a, bks);

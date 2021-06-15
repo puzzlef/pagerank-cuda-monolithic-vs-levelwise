@@ -1,14 +1,14 @@
 Comparing various min. component sizes for topologically-ordered components
-(levelwise) PageRank ([pull], [CSR]).
+(levelwise) [CUDA] based PageRank ([pull], [CSR]).
 
-This experiment was for comparing performance between:
-1. Find **levelwise** pagerank using **min. component size** from `1` - `1E+7`.
 
+For this experiment **min. component size** was varied from `1E+2` - `1E+7`.
 Each **min. component size** was attempted on different types of graphs,
 running each size 5 times per graph to get a good time measure. **Levelwise**
 pagerank is the [STIC-D algorithm], without **ICD** optimizations (using
-single-thread). Although there is no clear winner, it appears a
-**min. component size** of `50` would be a good choice.
+single-thread). It appears choosing the largest **min. component size**
+is the best, but that would not be useful. So, for the time being,
+**min. component size** is `50000` is chosen.
 
 All outputs are saved in [out/](out/) and a small part of the output is listed
 here. All [charts] are also included below, generated from [sheets]. The input
@@ -44,7 +44,10 @@ $ ...
 
 <br>
 
-[![](https://i.imgur.com/awWEd8m.png)][sheets]
+[![](https://i.imgur.com/kohs9Ov.png)][sheets]
+[![](https://i.imgur.com/eHwowMX.png)][sheets]
+[![](https://i.imgur.com/PjrAfeK.png)][sheets]
+[![](https://i.imgur.com/8bZtchZ.png)][sheets]
 
 <br>
 <br>
@@ -59,12 +62,12 @@ $ ...
 <br>
 <br>
 
-[![](https://i.imgur.com/1VFZdqh.jpg)](https://www.youtube.com/watch?v=vbXTZlJ5fHU)
+[![](https://i.imgur.com/y1Q1Fzy.jpg)](https://www.youtube.com/watch?v=vbXTZlJ5fHU)
 
+[SuiteSparse Matrix Collection]: https://suitesparse-collection-website.herokuapp.com
+[STIC-D algorithm]: https://www.slideshare.net/SubhajitSahu/sticd-algorithmic-techniques-for-efficient-parallel-pagerank-computation-on-realworld-graphs
+["graphs"]: https://github.com/puzzlef/graphs
 [pull]: https://github.com/puzzlef/pagerank-push-vs-pull
 [CSR]: https://github.com/puzzlef/pagerank-class-vs-csr
-[STIC-D algorithm]: https://www.slideshare.net/SubhajitSahu/sticd-algorithmic-techniques-for-efficient-parallel-pagerank-computation-on-realworld-graphs
-[charts]: https://photos.app.goo.gl/KveUUSpamrPKPmvY6
-[sheets]: https://docs.google.com/spreadsheets/d/1cdH3LURJo4KfflTF0grHtICUsaEmDHxKGy4Vti4eZc8/edit?usp=sharing
-["graphs"]: https://github.com/puzzlef/graphs
-[SuiteSparse Matrix Collection]: https://suitesparse-collection-website.herokuapp.com
+[charts]: https://photos.app.goo.gl/KzJK4wMtK9sJLRBWA
+[sheets]: https://docs.google.com/spreadsheets/d/1AvibiNPO1pIC56ZMc16bRQ7E-afvvxGU2V_b7crgz0o/edit?usp=sharing

@@ -24,6 +24,22 @@ $ ./a.out ~/data/min-2SCC.mtx
 $ ...
 
 # ...
+#
+# Loading graph /home/subhajit/data/web-Stanford.mtx ...
+# order: 281903 size: 2312497 {}
+# order: 281903 size: 2312669 {} (loopDeadEnds)
+# order: 281903 size: 2312669 {} (transposeWithDegree)
+# [00011.294 ms; 000 iters.] [0.0000e+00 err.] pagerankNvgraph
+# [00010.037 ms; 063 iters.] [7.0437e-07 err.] pagerankMonolithic
+# [00955.617 ms; 065 iters.] [5.1496e-06 err.] pagerankLevelwise [1e+02 min-component-size]
+# [00324.125 ms; 062 iters.] [4.2335e-06 err.] pagerankLevelwise [5e+02 min-component-size]
+# [00196.761 ms; 067 iters.] [5.5364e-06 err.] pagerankLevelwise [1e+03 min-component-size]
+# [00070.219 ms; 068 iters.] [5.4311e-06 err.] pagerankLevelwise [5e+03 min-component-size]
+# [00031.119 ms; 069 iters.] [4.9487e-06 err.] pagerankLevelwise [1e+04 min-component-size]
+# [00015.097 ms; 070 iters.] [4.3619e-06 err.] pagerankLevelwise [5e+04 min-component-size]
+# [00010.457 ms; 064 iters.] [1.9684e-06 err.] pagerankLevelwise [1e+05 min-component-size]
+#
+# ...
 ```
 
 <br>

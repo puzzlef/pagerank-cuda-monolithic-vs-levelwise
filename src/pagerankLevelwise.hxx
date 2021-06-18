@@ -80,8 +80,8 @@ template <class T, class J>
 int pagerankLevelwiseLoop(T *e, T *r0, T *eD, T *r0D, T *&aD, T *&rD, T *cD, const T *fD, const int *vfromD, const int *efromD, int i, J&& ws, int N, T p, T E, int L) {
   float l = 0;
   for (const auto& w : ws) {
-    float nN = float(n)/N;
     int n = w.first; const auto& ns = w.second;
+    float nN = float(n)/N;
     if (n<=0) { i += -n; continue; }
     l += pagerankMonolithicLoop(e, r0, eD, r0D, aD, rD, cD, fD, vfromD, efromD, i, ns, N, p, E*nN, L) * nN;
     swap(aD, rD);
@@ -107,11 +107,11 @@ PagerankResult<T> pagerankLevelwise(const G& w, const H& wt, const G& x, const H
   int  L = o.maxIterations, l;
   int  N = xt.order();
   int  R = reduceSizeCu(N);
-  auto wcs = pagerankComponents(w, wt, o);
-  auto xcs = pagerankComponents(x, xt, o);
+  auto wcs = pagerankComponents(w, wt);
+  auto xcs = pagerankComponents(x, xt);
   auto ns = pagerankWaveSizes(w, wt, wcs, x, xt, xcs);
-  auto cs = pagerankGroupComponents(xcs, ns, o.minComputeSize);
-  auto ws = pagerankGroupWaves(cs);
+  auto cs = pagerankGroupComponents(xt, xcs, ns, o.minComputeSize);
+  auto ws = pagerankGroupWaves(xt, cs);
   auto ks = join(cs);
   auto vfrom = sourceOffsets(xt, ks);
   auto efrom = destinationIndices(xt, ks);
@@ -148,7 +148,7 @@ PagerankResult<T> pagerankLevelwise(const G& w, const H& wt, const G& x, const H
     else fill(r, T(1)/N);
     TRY( cudaMemcpy(aD, a.data(), N1, cudaMemcpyHostToDevice) );
     TRY( cudaMemcpy(rD, r.data(), N1, cudaMemcpyHostToDevice) );
-    mark([&] { pagerankFactorCu(fD, vdataD, 0, N, p); });
+    mark([&] { pagerankFactorCu(fD, vdataD, 0, N, p); multiplyCu(cD, rD, fD, N); copyCu(aD, rD, N); });
     mark([&] { l = pagerankLevelwiseLoop(e, r0, eD, r0D, aD, rD, cD, fD, vfromD, efromD, 0, ws, N, p, E, L); });
   }, o.repeat);
   TRY( cudaMemcpy(a.data(), aD, N1, cudaMemcpyDeviceToHost) );

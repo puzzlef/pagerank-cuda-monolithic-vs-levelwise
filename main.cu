@@ -26,11 +26,11 @@ void runPagerank(const G& x, const H& xt, bool show) {
   auto e2 = l1Norm(a2.ranks, a1.ranks);
   printf("[%09.3f ms; %03d iters.] [%.4e err.] pagerankMonolithic\n", a2.time, a2.iterations, e2);
 
-  // Find levelwise pagerank using CUDA, adjusting min. component size.
-  for (int C=100, i=0; C<=max(x.order(), 100); C*=i&1? 2:5, i++) {
+  // Find levelwise pagerank using CUDA, adjusting min. compute size.
+  for (int C=1000, i=0; C<=max(x.order(), 1000); C*=i&1? 2:5, i++) {
     auto a3 = pagerankLevelwise(x, xt, init, {REPEAT, C});
     auto e3 = l1Norm(a3.ranks, a1.ranks);
-    printf("[%09.3f ms; %03d iters.] [%.4e err.] pagerankLevelwise [%.0e min-component-size]\n", a3.time, a3.iterations, e3, (double) C);
+    printf("[%09.3f ms; %03d iters.] [%.4e err.] pagerankLevelwise [%.0e min-compute-size]\n", a3.time, a3.iterations, e3, (double) C);
   }
 }
 

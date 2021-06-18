@@ -37,8 +37,8 @@ using std::move;
 #define GRID_DIM_PRST  GRID_LIMIT
 
 // For pagerank cuda switched switch-point
-#define PAGERANK_SWITCH_DEGREE 64
-#define PAGERANK_SWITCH_LIMIT  32
+#define SWITCH_DEGREE_PR 64
+#define SWITCH_LIMIT_PR  32
 
 
 

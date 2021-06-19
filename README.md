@@ -1,7 +1,6 @@
 Comparing various min. component sizes for topologically-ordered components
 (levelwise) [CUDA] based PageRank ([pull], [CSR]).
 
-
 For this experiment **min. component size** was varied from `1E+2` - `1E+7`.
 Each **min. component size** was attempted on different types of graphs,
 running each size 5 times per graph to get a good time measure. **Levelwise**
@@ -25,19 +24,19 @@ $ ...
 
 # ...
 #
-# Loading graph /home/subhajit/data/web-Stanford.mtx ...
-# order: 281903 size: 2312497 {}
-# order: 281903 size: 2312669 {} (loopDeadEnds)
-# order: 281903 size: 2312669 {} (transposeWithDegree)
-# [00011.294 ms; 000 iters.] [0.0000e+00 err.] pagerankNvgraph
-# [00010.037 ms; 063 iters.] [7.0437e-07 err.] pagerankMonolithic
-# [00955.617 ms; 065 iters.] [5.1496e-06 err.] pagerankLevelwise [1e+02 min-component-size]
-# [00324.125 ms; 062 iters.] [4.2335e-06 err.] pagerankLevelwise [5e+02 min-component-size]
-# [00196.761 ms; 067 iters.] [5.5364e-06 err.] pagerankLevelwise [1e+03 min-component-size]
-# [00070.219 ms; 068 iters.] [5.4311e-06 err.] pagerankLevelwise [5e+03 min-component-size]
-# [00031.119 ms; 069 iters.] [4.9487e-06 err.] pagerankLevelwise [1e+04 min-component-size]
-# [00015.097 ms; 070 iters.] [4.3619e-06 err.] pagerankLevelwise [5e+04 min-component-size]
-# [00010.457 ms; 064 iters.] [1.9684e-06 err.] pagerankLevelwise [1e+05 min-component-size]
+# Loading graph /home/subhajit/data/soc-LiveJournal1.mtx ...
+# order: 4847571 size: 68993773 {}
+# order: 4847571 size: 69532892 {} (loopDeadEnds)
+# order: 4847571 size: 69532892 {} (transposeWithDegree)
+# [00289.403 ms; 000 iters.] [0.0000e+00 err.] pagerankNvgraph
+# [00265.651 ms; 058 iters.] [2.7220e-06 err.] pagerankMonolithic
+# [01627.724 ms; 050 iters.] [4.0653e-06 err.] pagerankLevelwise [1e+03 min-compute-size]
+# [00533.757 ms; 050 iters.] [4.6830e-06 err.] pagerankLevelwise [5e+03 min-compute-size]
+# [00387.058 ms; 051 iters.] [3.9963e-06 err.] pagerankLevelwise [1e+04 min-compute-size]
+# [00263.821 ms; 051 iters.] [4.2981e-06 err.] pagerankLevelwise [5e+04 min-compute-size]
+# [00246.427 ms; 051 iters.] [3.6271e-06 err.] pagerankLevelwise [1e+05 min-compute-size]
+# [00252.093 ms; 056 iters.] [4.4768e-06 err.] pagerankLevelwise [5e+05 min-compute-size]
+# [00249.986 ms; 056 iters.] [5.2331e-06 err.] pagerankLevelwise [1e+06 min-compute-size]
 #
 # ...
 ```
@@ -45,9 +44,6 @@ $ ...
 <br>
 
 [![](https://i.imgur.com/kohs9Ov.png)][sheets]
-[![](https://i.imgur.com/eHwowMX.png)][sheets]
-[![](https://i.imgur.com/PjrAfeK.png)][sheets]
-[![](https://i.imgur.com/8bZtchZ.png)][sheets]
 
 <br>
 <br>

@@ -1,0 +1,254 @@
+Loading graph /home/subhajit/data/min-1DeadEnd.mtx ...
+order: 5 size: 6 {}
+order: 5 size: 7 {} (loopDeadEnds)
+order: 5 size: 7 {} (transposeWithDegree)
+[00000.560 ms; 000 iters.] [0.0000e+00 err.] pagerankNvgraph
+[00000.097 ms; 004 iters.] [2.3939e-16 err.] pagerankMonolithic
+[00000.100 ms; 004 iters.] [2.3939e-16 err.] pagerankLevelwise [1e+03 min-compute-size]
+
+Loading graph /home/subhajit/data/min-2SCC.mtx ...
+order: 8 size: 12 {}
+order: 8 size: 12 {} (loopDeadEnds)
+order: 8 size: 12 {} (transposeWithDegree)
+[00004.735 ms; 000 iters.] [0.0000e+00 err.] pagerankNvgraph
+[00000.947 ms; 040 iters.] [8.5100e-07 err.] pagerankMonolithic
+[00000.943 ms; 040 iters.] [8.5100e-07 err.] pagerankLevelwise [1e+03 min-compute-size]
+
+Loading graph /home/subhajit/data/min-4SCC.mtx ...
+order: 21 size: 35 {}
+order: 21 size: 35 {} (loopDeadEnds)
+order: 21 size: 35 {} (transposeWithDegree)
+[00005.180 ms; 000 iters.] [0.0000e+00 err.] pagerankNvgraph
+[00001.038 ms; 045 iters.] [6.1705e-07 err.] pagerankMonolithic
+[00001.039 ms; 045 iters.] [6.1705e-07 err.] pagerankLevelwise [1e+03 min-compute-size]
+
+Loading graph /home/subhajit/data/min-NvgraphEx.mtx ...
+order: 6 size: 10 {}
+order: 6 size: 11 {} (loopDeadEnds)
+order: 6 size: 11 {} (transposeWithDegree)
+[00001.905 ms; 000 iters.] [0.0000e+00 err.] pagerankNvgraph
+[00000.394 ms; 017 iters.] [3.8858e-16 err.] pagerankMonolithic
+[00000.403 ms; 017 iters.] [3.8858e-16 err.] pagerankLevelwise [1e+03 min-compute-size]
+
+Loading graph /home/subhajit/data/web-Stanford.mtx ...
+order: 281903 size: 2312497 {}
+order: 281903 size: 2312669 {} (loopDeadEnds)
+order: 281903 size: 2312669 {} (transposeWithDegree)
+[00014.634 ms; 000 iters.] [0.0000e+00 err.] pagerankNvgraph
+[00010.740 ms; 063 iters.] [6.5789e-07 err.] pagerankMonolithic
+[00208.464 ms; 060 iters.] [3.5129e-06 err.] pagerankLevelwise [1e+03 min-compute-size]
+[00071.276 ms; 062 iters.] [2.7976e-06 err.] pagerankLevelwise [5e+03 min-compute-size]
+[00048.260 ms; 063 iters.] [2.7821e-06 err.] pagerankLevelwise [1e+04 min-compute-size]
+[00014.407 ms; 063 iters.] [2.5395e-06 err.] pagerankLevelwise [5e+04 min-compute-size]
+[00011.184 ms; 062 iters.] [1.2102e-06 err.] pagerankLevelwise [1e+05 min-compute-size]
+
+Loading graph /home/subhajit/data/web-BerkStan.mtx ...
+order: 685230 size: 7600595 {}
+order: 685230 size: 7605339 {} (loopDeadEnds)
+order: 685230 size: 7605339 {} (transposeWithDegree)
+[00024.349 ms; 000 iters.] [0.0000e+00 err.] pagerankNvgraph
+[00022.645 ms; 064 iters.] [9.5748e-07 err.] pagerankMonolithic
+[00419.923 ms; 056 iters.] [3.1616e-06 err.] pagerankLevelwise [1e+03 min-compute-size]
+[00176.244 ms; 060 iters.] [3.0669e-06 err.] pagerankLevelwise [5e+03 min-compute-size]
+[00123.674 ms; 061 iters.] [3.1895e-06 err.] pagerankLevelwise [1e+04 min-compute-size]
+[00040.297 ms; 063 iters.] [2.8757e-06 err.] pagerankLevelwise [5e+04 min-compute-size]
+[00038.362 ms; 065 iters.] [2.5428e-06 err.] pagerankLevelwise [1e+05 min-compute-size]
+[00026.784 ms; 063 iters.] [1.3412e-06 err.] pagerankLevelwise [5e+05 min-compute-size]
+
+Loading graph /home/subhajit/data/web-Google.mtx ...
+order: 916428 size: 5105039 {}
+order: 916428 size: 5282013 {} (loopDeadEnds)
+order: 916428 size: 5282013 {} (transposeWithDegree)
+[00041.674 ms; 000 iters.] [0.0000e+00 err.] pagerankNvgraph
+[00019.370 ms; 062 iters.] [9.3189e-07 err.] pagerankMonolithic
+[00684.034 ms; 057 iters.] [3.9687e-06 err.] pagerankLevelwise [1e+03 min-compute-size]
+[00174.224 ms; 058 iters.] [3.4572e-06 err.] pagerankLevelwise [5e+03 min-compute-size]
+[00085.079 ms; 059 iters.] [3.7379e-06 err.] pagerankLevelwise [1e+04 min-compute-size]
+[00027.343 ms; 059 iters.] [3.5395e-06 err.] pagerankLevelwise [5e+04 min-compute-size]
+[00021.288 ms; 059 iters.] [3.2650e-06 err.] pagerankLevelwise [1e+05 min-compute-size]
+[00016.039 ms; 059 iters.] [1.9613e-06 err.] pagerankLevelwise [5e+05 min-compute-size]
+
+Loading graph /home/subhajit/data/web-NotreDame.mtx ...
+order: 325729 size: 1497134 {}
+order: 325729 size: 1684922 {} (loopDeadEnds)
+order: 325729 size: 1684922 {} (transposeWithDegree)
+[00012.951 ms; 000 iters.] [0.0000e+00 err.] pagerankNvgraph
+[00005.503 ms; 053 iters.] [9.4710e-07 err.] pagerankMonolithic
+[00451.588 ms; 056 iters.] [4.5188e-06 err.] pagerankLevelwise [1e+03 min-compute-size]
+[00172.320 ms; 059 iters.] [4.2275e-06 err.] pagerankLevelwise [5e+03 min-compute-size]
+[00127.942 ms; 059 iters.] [4.2360e-06 err.] pagerankLevelwise [1e+04 min-compute-size]
+[00015.450 ms; 060 iters.] [4.2904e-06 err.] pagerankLevelwise [5e+04 min-compute-size]
+[00011.551 ms; 059 iters.] [3.6136e-06 err.] pagerankLevelwise [1e+05 min-compute-size]
+
+Loading graph /home/subhajit/data/soc-Slashdot0811.mtx ...
+order: 77360 size: 905468 {}
+order: 77360 size: 905512 {} (loopDeadEnds)
+order: 77360 size: 905512 {} (transposeWithDegree)
+[00008.082 ms; 000 iters.] [0.0000e+00 err.] pagerankNvgraph
+[00002.637 ms; 056 iters.] [7.3305e-07 err.] pagerankMonolithic
+[00015.212 ms; 053 iters.] [4.2973e-06 err.] pagerankLevelwise [1e+03 min-compute-size]
+[00005.907 ms; 053 iters.] [4.3496e-06 err.] pagerankLevelwise [5e+03 min-compute-size]
+[00004.354 ms; 053 iters.] [5.1676e-06 err.] pagerankLevelwise [1e+04 min-compute-size]
+[00004.350 ms; 053 iters.] [5.1676e-06 err.] pagerankLevelwise [5e+04 min-compute-size]
+
+Loading graph /home/subhajit/data/soc-Slashdot0902.mtx ...
+order: 82168 size: 948464 {}
+order: 82168 size: 952191 {} (loopDeadEnds)
+order: 82168 size: 952191 {} (transposeWithDegree)
+[00009.092 ms; 000 iters.] [0.0000e+00 err.] pagerankNvgraph
+[00003.159 ms; 058 iters.] [2.5219e-06 err.] pagerankMonolithic
+[00024.759 ms; 057 iters.] [4.4256e-06 err.] pagerankLevelwise [1e+03 min-compute-size]
+[00012.051 ms; 057 iters.] [3.6330e-06 err.] pagerankLevelwise [5e+03 min-compute-size]
+[00010.468 ms; 057 iters.] [3.5436e-06 err.] pagerankLevelwise [1e+04 min-compute-size]
+[00008.721 ms; 057 iters.] [4.2357e-06 err.] pagerankLevelwise [5e+04 min-compute-size]
+
+Loading graph /home/subhajit/data/soc-Epinions1.mtx ...
+order: 75888 size: 508837 {}
+order: 75888 size: 524384 {} (loopDeadEnds)
+order: 75888 size: 524384 {} (transposeWithDegree)
+[00008.940 ms; 000 iters.] [0.0000e+00 err.] pagerankNvgraph
+[00002.681 ms; 059 iters.] [2.3598e-06 err.] pagerankMonolithic
+[00054.521 ms; 055 iters.] [3.6993e-06 err.] pagerankLevelwise [1e+03 min-compute-size]
+[00015.263 ms; 058 iters.] [3.8711e-06 err.] pagerankLevelwise [5e+03 min-compute-size]
+[00008.581 ms; 057 iters.] [3.7619e-06 err.] pagerankLevelwise [1e+04 min-compute-size]
+[00004.817 ms; 058 iters.] [3.3145e-06 err.] pagerankLevelwise [5e+04 min-compute-size]
+
+Loading graph /home/subhajit/data/coAuthorsDBLP.mtx ...
+order: 299067 size: 1955352 {}
+order: 299067 size: 1955352 {} (loopDeadEnds)
+order: 299067 size: 1955352 {} (transposeWithDegree)
+[00010.264 ms; 000 iters.] [0.0000e+00 err.] pagerankNvgraph
+[00003.311 ms; 045 iters.] [2.9398e-06 err.] pagerankMonolithic
+[00003.240 ms; 045 iters.] [2.9398e-06 err.] pagerankLevelwise [1e+03 min-compute-size]
+[00003.216 ms; 045 iters.] [2.9398e-06 err.] pagerankLevelwise [5e+03 min-compute-size]
+[00003.210 ms; 045 iters.] [2.9398e-06 err.] pagerankLevelwise [1e+04 min-compute-size]
+[00003.219 ms; 045 iters.] [2.9398e-06 err.] pagerankLevelwise [5e+04 min-compute-size]
+[00003.214 ms; 045 iters.] [2.9398e-06 err.] pagerankLevelwise [1e+05 min-compute-size]
+
+Loading graph /home/subhajit/data/coAuthorsCiteseer.mtx ...
+order: 227320 size: 1628268 {}
+order: 227320 size: 1628268 {} (loopDeadEnds)
+order: 227320 size: 1628268 {} (transposeWithDegree)
+[00009.239 ms; 000 iters.] [0.0000e+00 err.] pagerankNvgraph
+[00003.132 ms; 048 iters.] [2.2317e-06 err.] pagerankMonolithic
+[00003.065 ms; 048 iters.] [2.2317e-06 err.] pagerankLevelwise [1e+03 min-compute-size]
+[00003.083 ms; 048 iters.] [2.2317e-06 err.] pagerankLevelwise [5e+03 min-compute-size]
+[00003.098 ms; 048 iters.] [2.2317e-06 err.] pagerankLevelwise [1e+04 min-compute-size]
+[00003.086 ms; 048 iters.] [2.2317e-06 err.] pagerankLevelwise [5e+04 min-compute-size]
+[00003.063 ms; 048 iters.] [2.2317e-06 err.] pagerankLevelwise [1e+05 min-compute-size]
+
+Loading graph /home/subhajit/data/soc-LiveJournal1.mtx ...
+order: 4847571 size: 68993773 {}
+order: 4847571 size: 69532892 {} (loopDeadEnds)
+order: 4847571 size: 69532892 {} (transposeWithDegree)
+[00289.403 ms; 000 iters.] [0.0000e+00 err.] pagerankNvgraph
+[00265.651 ms; 058 iters.] [2.7220e-06 err.] pagerankMonolithic
+[01627.724 ms; 050 iters.] [4.0653e-06 err.] pagerankLevelwise [1e+03 min-compute-size]
+[00533.757 ms; 050 iters.] [4.6830e-06 err.] pagerankLevelwise [5e+03 min-compute-size]
+[00387.058 ms; 051 iters.] [3.9963e-06 err.] pagerankLevelwise [1e+04 min-compute-size]
+[00263.821 ms; 051 iters.] [4.2981e-06 err.] pagerankLevelwise [5e+04 min-compute-size]
+[00246.427 ms; 051 iters.] [3.6271e-06 err.] pagerankLevelwise [1e+05 min-compute-size]
+[00252.093 ms; 056 iters.] [4.4768e-06 err.] pagerankLevelwise [5e+05 min-compute-size]
+[00249.986 ms; 056 iters.] [5.2331e-06 err.] pagerankLevelwise [1e+06 min-compute-size]
+
+Loading graph /home/subhajit/data/coPapersCiteseer.mtx ...
+order: 434102 size: 32073440 {}
+order: 434102 size: 32073440 {} (loopDeadEnds)
+order: 434102 size: 32073440 {} (transposeWithDegree)
+[00040.846 ms; 000 iters.] [0.0000e+00 err.] pagerankNvgraph
+[00039.144 ms; 051 iters.] [1.3766e-06 err.] pagerankMonolithic
+[00039.097 ms; 051 iters.] [1.3766e-06 err.] pagerankLevelwise [1e+03 min-compute-size]
+[00039.076 ms; 051 iters.] [1.3766e-06 err.] pagerankLevelwise [5e+03 min-compute-size]
+[00039.086 ms; 051 iters.] [1.3766e-06 err.] pagerankLevelwise [1e+04 min-compute-size]
+[00039.089 ms; 051 iters.] [1.3766e-06 err.] pagerankLevelwise [5e+04 min-compute-size]
+[00039.090 ms; 051 iters.] [1.3766e-06 err.] pagerankLevelwise [1e+05 min-compute-size]
+
+Loading graph /home/subhajit/data/coPapersDBLP.mtx ...
+order: 540486 size: 30491458 {}
+order: 540486 size: 30491458 {} (loopDeadEnds)
+order: 540486 size: 30491458 {} (transposeWithDegree)
+[00041.614 ms; 000 iters.] [0.0000e+00 err.] pagerankNvgraph
+[00042.060 ms; 049 iters.] [1.4602e-06 err.] pagerankMonolithic
+[00041.551 ms; 049 iters.] [1.4602e-06 err.] pagerankLevelwise [1e+03 min-compute-size]
+[00041.545 ms; 049 iters.] [1.4602e-06 err.] pagerankLevelwise [5e+03 min-compute-size]
+[00041.912 ms; 049 iters.] [1.4602e-06 err.] pagerankLevelwise [1e+04 min-compute-size]
+[00041.843 ms; 049 iters.] [1.4602e-06 err.] pagerankLevelwise [5e+04 min-compute-size]
+[00041.549 ms; 049 iters.] [1.4602e-06 err.] pagerankLevelwise [1e+05 min-compute-size]
+[00041.558 ms; 049 iters.] [1.4602e-06 err.] pagerankLevelwise [5e+05 min-compute-size]
+
+Loading graph /home/subhajit/data/indochina-2004.mtx ...
+order: 7414866 size: 194109311 {}
+order: 7414866 size: 195418438 {} (loopDeadEnds)
+order: 7414866 size: 195418438 {} (transposeWithDegree)
+[00311.569 ms; 000 iters.] [0.0000e+00 err.] pagerankNvgraph
+[00139.072 ms; 059 iters.] [1.1892e-06 err.] pagerankMonolithic
+[12024.397 ms; 058 iters.] [3.0648e-06 err.] pagerankLevelwise [1e+03 min-compute-size]
+[02915.983 ms; 060 iters.] [3.0885e-06 err.] pagerankLevelwise [5e+03 min-compute-size]
+[01240.531 ms; 060 iters.] [2.8774e-06 err.] pagerankLevelwise [1e+04 min-compute-size]
+[00457.606 ms; 061 iters.] [2.7563e-06 err.] pagerankLevelwise [5e+04 min-compute-size]
+[00385.714 ms; 061 iters.] [2.8710e-06 err.] pagerankLevelwise [1e+05 min-compute-size]
+[00231.839 ms; 061 iters.] [2.6926e-06 err.] pagerankLevelwise [5e+05 min-compute-size]
+[00216.843 ms; 061 iters.] [2.9316e-06 err.] pagerankLevelwise [1e+06 min-compute-size]
+[00194.759 ms; 061 iters.] [2.1078e-06 err.] pagerankLevelwise [5e+06 min-compute-size]
+
+Loading graph /home/subhajit/data/italy_osm.mtx ...
+order: 6686493 size: 14027956 {}
+order: 6686493 size: 14027956 {} (loopDeadEnds)
+order: 6686493 size: 14027956 {} (transposeWithDegree)
+[00104.570 ms; 000 iters.] [0.0000e+00 err.] pagerankNvgraph
+[00040.553 ms; 062 iters.] [7.3001e-07 err.] pagerankMonolithic
+[00036.714 ms; 062 iters.] [7.3001e-07 err.] pagerankLevelwise [1e+03 min-compute-size]
+[00037.039 ms; 062 iters.] [7.3001e-07 err.] pagerankLevelwise [5e+03 min-compute-size]
+[00036.695 ms; 062 iters.] [7.3001e-07 err.] pagerankLevelwise [1e+04 min-compute-size]
+[00036.709 ms; 062 iters.] [7.3001e-07 err.] pagerankLevelwise [5e+04 min-compute-size]
+[00036.701 ms; 062 iters.] [7.3001e-07 err.] pagerankLevelwise [1e+05 min-compute-size]
+[00036.999 ms; 062 iters.] [7.3001e-07 err.] pagerankLevelwise [5e+05 min-compute-size]
+[00036.687 ms; 062 iters.] [7.3001e-07 err.] pagerankLevelwise [1e+06 min-compute-size]
+[00036.703 ms; 062 iters.] [7.3001e-07 err.] pagerankLevelwise [5e+06 min-compute-size]
+
+Loading graph /home/subhajit/data/great-britain_osm.mtx ...
+order: 7733822 size: 16313034 {}
+order: 7733822 size: 16313034 {} (loopDeadEnds)
+order: 7733822 size: 16313034 {} (transposeWithDegree)
+[00130.259 ms; 000 iters.] [0.0000e+00 err.] pagerankNvgraph
+[00054.296 ms; 067 iters.] [1.1567e-07 err.] pagerankMonolithic
+[00045.836 ms; 067 iters.] [1.1567e-07 err.] pagerankLevelwise [1e+03 min-compute-size]
+[00045.838 ms; 067 iters.] [1.1567e-07 err.] pagerankLevelwise [5e+03 min-compute-size]
+[00045.822 ms; 067 iters.] [1.1567e-07 err.] pagerankLevelwise [1e+04 min-compute-size]
+[00045.824 ms; 067 iters.] [1.1567e-07 err.] pagerankLevelwise [5e+04 min-compute-size]
+[00045.981 ms; 067 iters.] [1.1567e-07 err.] pagerankLevelwise [1e+05 min-compute-size]
+[00045.842 ms; 067 iters.] [1.1567e-07 err.] pagerankLevelwise [5e+05 min-compute-size]
+[00045.876 ms; 067 iters.] [1.1567e-07 err.] pagerankLevelwise [1e+06 min-compute-size]
+[00045.829 ms; 067 iters.] [1.1567e-07 err.] pagerankLevelwise [5e+06 min-compute-size]
+
+Loading graph /home/subhajit/data/germany_osm.mtx ...
+order: 11548845 size: 24738362 {}
+order: 11548845 size: 24738362 {} (loopDeadEnds)
+order: 11548845 size: 24738362 {} (transposeWithDegree)
+[00192.447 ms; 000 iters.] [0.0000e+00 err.] pagerankNvgraph
+[00084.686 ms; 065 iters.] [1.2458e-07 err.] pagerankMonolithic
+[00066.633 ms; 065 iters.] [1.2458e-07 err.] pagerankLevelwise [1e+03 min-compute-size]
+[00066.374 ms; 065 iters.] [1.2458e-07 err.] pagerankLevelwise [5e+03 min-compute-size]
+[00066.382 ms; 065 iters.] [1.2458e-07 err.] pagerankLevelwise [1e+04 min-compute-size]
+[00066.395 ms; 065 iters.] [1.2458e-07 err.] pagerankLevelwise [5e+04 min-compute-size]
+[00066.414 ms; 065 iters.] [1.2458e-07 err.] pagerankLevelwise [1e+05 min-compute-size]
+[00066.375 ms; 065 iters.] [1.2458e-07 err.] pagerankLevelwise [5e+05 min-compute-size]
+[00066.458 ms; 065 iters.] [1.2458e-07 err.] pagerankLevelwise [1e+06 min-compute-size]
+[00066.392 ms; 065 iters.] [1.2458e-07 err.] pagerankLevelwise [5e+06 min-compute-size]
+[00066.388 ms; 065 iters.] [1.2458e-07 err.] pagerankLevelwise [1e+07 min-compute-size]
+
+Loading graph /home/subhajit/data/asia_osm.mtx ...
+order: 11950757 size: 25423206 {}
+order: 11950757 size: 25423206 {} (loopDeadEnds)
+order: 11950757 size: 25423206 {} (transposeWithDegree)
+[00187.251 ms; 000 iters.] [0.0000e+00 err.] pagerankNvgraph
+[00072.145 ms; 063 iters.] [6.2751e-07 err.] pagerankMonolithic
+[00065.176 ms; 063 iters.] [6.2751e-07 err.] pagerankLevelwise [1e+03 min-compute-size]
+[00065.166 ms; 063 iters.] [6.2751e-07 err.] pagerankLevelwise [5e+03 min-compute-size]
+[00065.330 ms; 063 iters.] [6.2751e-07 err.] pagerankLevelwise [1e+04 min-compute-size]
+[00065.309 ms; 063 iters.] [6.2751e-07 err.] pagerankLevelwise [5e+04 min-compute-size]
+[00065.151 ms; 063 iters.] [6.2751e-07 err.] pagerankLevelwise [1e+05 min-compute-size]
+[00065.142 ms; 063 iters.] [6.2751e-07 err.] pagerankLevelwise [5e+05 min-compute-size]
+[00065.217 ms; 063 iters.] [6.2751e-07 err.] pagerankLevelwise [1e+06 min-compute-size]
+[00065.167 ms; 063 iters.] [6.2751e-07 err.] pagerankLevelwise [5e+06 min-compute-size]
+[00065.175 ms; 063 iters.] [6.2751e-07 err.] pagerankLevelwise [1e+07 min-compute-size]

@@ -9,7 +9,6 @@
 #include "transpose.hxx"
 #include "dfs.hxx"
 #include "components.hxx"
-#include "blockgraph.hxx"
 #include "topologicalSort.hxx"
 #include "deadEnds.hxx"
 #include "pagerank.hxx"

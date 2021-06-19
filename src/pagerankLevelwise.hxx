@@ -6,8 +6,6 @@
 #include "edges.hxx"
 #include "csr.hxx"
 #include "components.hxx"
-#include "blockgraph.hxx"
-#include "topologicalSort.hxx"
 #include "pagerank.hxx"
 #include "pagerankMonolithic.hxx"
 
@@ -16,16 +14,6 @@ using std::vector;
 using std::swap;
 
 
-
-
-template <class G, class H>
-auto pagerankComponents(const G& x, const H& xt) {
-  auto a = components(x, xt);
-  auto b = blockgraph(x, a);
-  auto bks = topologicalSort(b);
-  reorder(a, bks);
-  return a;
-}
 
 
 template <class G, class H, class C>
@@ -107,8 +95,8 @@ PagerankResult<T> pagerankLevelwise(const G& w, const H& wt, const G& x, const H
   int  L = o.maxIterations, l;
   int  N = xt.order();
   int  R = reduceSizeCu(N);
-  auto wcs = pagerankComponents(w, wt);
-  auto xcs = pagerankComponents(x, xt);
+  auto wcs = sortedComponents(w, wt);
+  auto xcs = sortedComponents(x, xt);
   auto ns = pagerankWaveSizes(w, wt, wcs, x, xt, xcs);
   auto cs = pagerankGroupComponents(xt, xcs, ns);
   auto ws = pagerankGroupWaves(xt, cs);

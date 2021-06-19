@@ -12,5 +12,6 @@
 #include "topologicalSort.hxx"
 #include "deadEnds.hxx"
 #include "pagerank.hxx"
+#include "pagerankNvgraph.hxx"
 #include "pagerankMonolithic.hxx"
 #include "pagerankLevelwise.hxx"

@@ -8,21 +8,27 @@ using namespace std;
 
 
 
+#define REPEAT 5
+
 template <class G, class H>
 void runPagerank(const G& x, const H& xt, bool show) {
-  int repeat = 5;
   vector<float> *init = nullptr;
 
-  // Find pagerank using a single thread.
-  auto a1 = pagerankMonolithic(xt, init, {repeat});
+  // Find pagerank using nvGraph.
+  auto a1 = pagerankNvgraph(xt, init, {REPEAT});
   auto e1 = l1Norm(a1.ranks, a1.ranks);
-  printf("[%09.3f ms; %03d iters.] [%.4e err.] pagerankMonolithic\n", a1.time, a1.iterations, e1);
+  printf("[%09.3f ms; %03d iters.] [%.4e err.] pagerankNvgraph\n", a1.time, a1.iterations, e1);
   if (show) println(a1.ranks);
 
-  // Find pagerank component-wise in topologically-ordered fashion (levelwise).
-  auto a2 = pagerankLevelwise(x, xt, init, {repeat});
+  // Find pagerank using standard alorithm (monolithic).
+  auto a2 = pagerankMonolithic(xt, init, {REPEAT});
   auto e2 = l1Norm(a2.ranks, a1.ranks);
-  printf("[%09.3f ms; %03d iters.] [%.4e err.] pagerankLevelwise\n", a2.time, a2.iterations, e2);
+  printf("[%09.3f ms; %03d iters.] [%.4e err.] pagerankMonolithic\n", a2.time, a2.iterations, e2);
+
+  // Find pagerank component-wise in topologically-ordered fashion (levelwise).
+  auto a3 = pagerankLevelwise(x, xt, init, {REPEAT});
+  auto e3 = l1Norm(a3.ranks, a1.ranks);
+  printf("[%09.3f ms; %03d iters.] [%.4e err.] pagerankLevelwise\n", a3.time, a3.iterations, e3);
 }
 
 

@@ -15,10 +15,10 @@ using std::vector;
 
 template <class G, class H>
 auto components(const G& x, const H& xt) {
-  vector<vector<int>> a;
+  vector2d<int> a;
+  vector<int> vs;
   // original dfs
   auto vis = createContainer(x, bool());
-  vector<int> vs;
   for (int u : x.vertices())
     if (!vis[u]) dfsEndLoop(vs, vis, x, u);
   // transpose dfs
@@ -40,7 +40,7 @@ auto components(const G& x, const H& xt) {
 // Get component id of each vertex.
 
 template <class G>
-auto componentIds(const G& x, const vector<vector<int>>& comps) {
+auto componentIds(const G& x, const vector2d<int>& comps) {
   auto a = createContainer(x, int()); int i = 0;
   for (const auto& comp : comps) {
     for (int u : comp)
@@ -56,8 +56,8 @@ auto componentIds(const G& x, const vector<vector<int>>& comps) {
 // BLOCKGRAPH
 // ----------
 
-template <class H, class G, class C>
-void blockgraph(H& a, const G& x, const C& comps) {
+template <class H, class G>
+void blockgraph(H& a, const G& x, const vector2d<int>& comps) {
   auto c = componentIds(x, comps);
   for (int u : x.vertices()) {
     a.addVertex(c[u]);
@@ -66,8 +66,8 @@ void blockgraph(H& a, const G& x, const C& comps) {
   }
 }
 
-template <class G, class C>
-auto blockgraph(const G& x, const C& comps) {
+template <class G>
+auto blockgraph(const G& x, const vector2d<int>& comps) {
   G a; blockgraph(a, x, comps);
   return a;
 }

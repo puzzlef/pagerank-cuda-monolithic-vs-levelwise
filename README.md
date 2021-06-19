@@ -1,19 +1,19 @@
-Performance of standard (**monolithic**) vs topologically-ordered components
-(**levelwise**) PageRank ([pull], [CSR], [compute-10]).
+Performance of standard (**monolithic CUDA**) vs topologically-ordered components
+(**levelwise CUDA**) PageRank ([pull], [CSR], [skip-teleport], [compute-5M]).
 
 This experiment was for comparing performance between:
-1. Find pagerank with standard algorithm (**monolithic**).
-2. Find pagerank in topologically-ordered components fashion (**levelwise**).
+1. Find **CUDA** based pagerank with standard algorithm (**monolithic**).
+2. Find **CUDA** based pagerank in topologically-ordered components fashion (**levelwise**).
 
 Both approaches were attempted on different types of graphs, running each
 approach 5 times per graph to get a good time measure. **Levelwise** pagerank
 is the [STIC-D algorithm], without **ICD** optimizations (using single-thread).
-On average, **levelwise** pagerank is faster than the **monolithic** approach.
+On average, **levelwise** pagerank is **faster** than the *monolithic* approach.
 
 All outputs are saved in [out](out/) and a small part of the output is listed
 here. All [charts] are also included below, generated from [sheets]. The input
 data used for this experiment is available at ["graphs"] (for small ones), and
-the [SuiteSparse Matrix Collection]. For previous experiments, see [branches].
+the [SuiteSparse Matrix Collection].
 
 <br>
 
@@ -25,6 +25,23 @@ $ ...
 
 # ...
 #
+# Loading graph /home/subhajit/data/web-Stanford.mtx ...
+# order: 281903 size: 2312497 {}
+# order: 281903 size: 2312669 {} (loopDeadEnds)
+# order: 281903 size: 2312669 {} (transposeWithDegree)
+# [00012.078 ms; 000 iters.] [0.0000e+00 err.] pagerankNvgraph
+# [00010.097 ms; 063 iters.] [7.0437e-07 err.] pagerankMonolithic
+# [00009.169 ms; 063 iters.] [7.0437e-07 err.] pagerankLevelwise
+#
+# ...
+#
+# Loading graph /home/subhajit/data/soc-LiveJournal1.mtx ...
+# order: 4847571 size: 68993773 {}
+# order: 4847571 size: 69532892 {} (loopDeadEnds)
+# order: 4847571 size: 69532892 {} (transposeWithDegree)
+# [00165.932 ms; 000 iters.] [0.0000e+00 err.] pagerankNvgraph
+# [00177.466 ms; 058 iters.] [2.6097e-06 err.] pagerankMonolithic
+# [00169.848 ms; 058 iters.] [2.6097e-06 err.] pagerankLevelwise
 #
 # ...
 ```
@@ -46,12 +63,10 @@ $ ...
 
 [SuiteSparse Matrix Collection]: https://suitesparse-collection-website.herokuapp.com
 [STIC-D algorithm]: https://www.slideshare.net/SubhajitSahu/sticd-algorithmic-techniques-for-efficient-parallel-pagerank-computation-on-realworld-graphs
-[monolithic]: https://github.com/puzzlef/pagerank-monolithic-vs-levelwise
-[levelwise]: https://github.com/puzzlef/pagerank-monolithic-vs-levelwise
 ["graphs"]: https://github.com/puzzlef/graphs
 [pull]: https://github.com/puzzlef/pagerank-push-vs-pull
 [CSR]: https://github.com/puzzlef/pagerank-class-vs-csr
-[compute-10]: https://github.com/puzzlef/pagerank-levelwise-adjust-compute-size
-[branches]: https://github.com/puzzlef/pagerank-monolithic-vs-levelwise/branches
+[skip-teleport]: https://github.com/puzzlef/pagerank-levelwise-skip-teleport
+[compute-5M]: https://github.com/puzzlef/pagerank-levelwise-cuda-adjust-compute-size
 [charts]: https://photos.app.goo.gl/KgBUFkTrHGB4WBfs9
 [sheets]: https://docs.google.com/spreadsheets/d/10KhCjLln713-qWsQMURTQKmQsniTO0xwGzNeQkuV3sE/edit?usp=sharing

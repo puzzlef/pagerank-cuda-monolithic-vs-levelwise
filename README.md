@@ -8,7 +8,8 @@ This experiment was for comparing performance between:
 Both approaches were attempted on different types of graphs, running each
 approach 5 times per graph to get a good time measure. **Levelwise** pagerank
 is the [STIC-D algorithm], without **ICD** optimizations (using single-thread).
-On average, **levelwise** pagerank is **faster** than the *monolithic* approach.
+On average, **levelwise** pagerank is **same** performance as the *monolithic*
+approach.
 
 All outputs are saved in [out](out/) and a small part of the output is listed
 here. All [charts] are also included below, generated from [sheets]. The input
@@ -46,6 +47,9 @@ $ ...
 # ...
 ```
 
+[![](https://i.imgur.com/2K0WuWu.gif)][sheets]
+[![](https://i.imgur.com/wn0Od0x.gif)][sheets]
+
 <br>
 <br>
 
@@ -59,7 +63,7 @@ $ ...
 <br>
 <br>
 
-[![](https://i.imgur.com/ewKOeWS.jpg)](https://www.youtube.com/watch?v=eBW0s125f-Y)
+[![](https://i.imgur.com/uF80zAS.jpg)](https://www.youtube.com/watch?v=riC9mRFp1ig)
 
 [SuiteSparse Matrix Collection]: https://suitesparse-collection-website.herokuapp.com
 [STIC-D algorithm]: https://www.slideshare.net/SubhajitSahu/sticd-algorithmic-techniques-for-efficient-parallel-pagerank-computation-on-realworld-graphs
@@ -68,5 +72,5 @@ $ ...
 [CSR]: https://github.com/puzzlef/pagerank-class-vs-csr
 [skip-teleport]: https://github.com/puzzlef/pagerank-levelwise-skip-teleport
 [compute-5M]: https://github.com/puzzlef/pagerank-levelwise-cuda-adjust-compute-size
-[charts]: https://photos.app.goo.gl/KgBUFkTrHGB4WBfs9
-[sheets]: https://docs.google.com/spreadsheets/d/10KhCjLln713-qWsQMURTQKmQsniTO0xwGzNeQkuV3sE/edit?usp=sharing
+[charts]: https://photos.app.goo.gl/xeZWBbSgBcCMDhDBA
+[sheets]: https://docs.google.com/spreadsheets/d/1OMmcMTKi9TYyhyZBZjP9c7sceMAapPbyn-GW0gngn9k/edit?usp=sharing

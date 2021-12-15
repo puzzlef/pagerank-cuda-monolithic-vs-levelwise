@@ -290,8 +290,8 @@ PagerankResult<T> pagerankCuda(const H& xt, const J& ks, int i, const M& ns, FL 
     else fill(r, T(1)/N);
     TRY( cudaMemcpy(aD, r.data(), N1, cudaMemcpyHostToDevice) );
     TRY( cudaMemcpy(rD, r.data(), N1, cudaMemcpyHostToDevice) );
-    mark([&] { pagerankFactorCu(fD, vdataD, 0, N, p); multiplyCu(cD, aD, fD, N); });                       // calculate factors (fD) and contributions (cD)
-    mark([&] { l = fl(e, r0, eD, r0D, aD, rD, cD, fD, vfromD, efromD, vdataD, i, ns, N, p, E, L, EF); });  // calculate ranks of vertices
+    mark([&] { pagerankFactorCu(fD, vdataD, 0, N, p); multiplyCu(cD, aD, fD, N); });               // calculate factors (fD) and contributions (cD)
+    mark([&] { l = fl(e, r0, eD, r0D, aD, rD, cD, fD, vfromD, efromD, i, ns, N, p, E, L, EF); });  // calculate ranks of vertices
   }, o.repeat);
   TRY( cudaMemcpy(a.data(), aD, N1, cudaMemcpyDeviceToHost) );
 

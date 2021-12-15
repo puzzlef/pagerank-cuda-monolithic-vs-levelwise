@@ -1,6 +1,8 @@
 Comparing various min. compute sizes for topologically-ordered components
 ([levelwise CUDA]) PageRank ([pull], [CSR]).
 
+`TODO!`
+
 This experiment was for comparing performance between [levelwise CUDA] pagerank
 with various **min. compute size**, ranging from `1E+3` - `1E+7`. Here,
 **min. compute size** is the minimum no. nodes of each pagerank compute using

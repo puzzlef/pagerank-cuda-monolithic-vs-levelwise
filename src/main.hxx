@@ -13,5 +13,6 @@
 #include "deadEnds.hxx"
 #include "selfLoop.hxx"
 #include "pagerank.hxx"
-#include "pagerankMonolithicSeq.hxx"
-#include "pagerankLevelwiseSeq.hxx"
+#include "pagerankCuda.hxx"
+#include "pagerankMonolithicCuda.hxx"
+#include "pagerankLevelwiseCuda.hxx"

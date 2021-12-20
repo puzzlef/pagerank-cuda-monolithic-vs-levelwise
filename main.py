@@ -1,7 +1,7 @@
-# https://www.kaggle.com/wolfram77/puzzlef-pagerank-levelwise-cuda-adjust-compute-size
+# https://www.kaggle.com/wolfram77/puzzlef-pagerank-componentwise-cuda-adjust-compute-size
 import os
 from IPython.display import FileLink
-src="pagerank-levelwise-cuda-adjust-compute-size"
+src="pagerank-componentwise-cuda-adjust-compute-size"
 inp="/kaggle/input/graphs"
 out="{}.txt".format(src)
 !printf "" > "$out"

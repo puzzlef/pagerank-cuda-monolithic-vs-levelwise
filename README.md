@@ -11,7 +11,7 @@ is the [STIC-D algorithm], without **ICD** optimizations (using single-thread).
 On average, **levelwise** pagerank is **same** performance as the *monolithic*
 approach.
 
-All outputs are saved in [out](out/) and a small part of the output is listed
+All outputs are saved in [gist] and a small part of the output is listed
 here. All [charts] are also included below, generated from [sheets]. The input
 data used for this experiment is available at ["graphs"] (for small ones), and
 the [SuiteSparse Matrix Collection].
@@ -68,9 +68,10 @@ $ ...
 [SuiteSparse Matrix Collection]: https://suitesparse-collection-website.herokuapp.com
 [STIC-D algorithm]: https://www.slideshare.net/SubhajitSahu/sticd-algorithmic-techniques-for-efficient-parallel-pagerank-computation-on-realworld-graphs
 ["graphs"]: https://github.com/puzzlef/graphs
-[pull]: https://github.com/puzzlef/pagerank-push-vs-pull
-[CSR]: https://github.com/puzzlef/pagerank-class-vs-csr
-[skip-teleport]: https://github.com/puzzlef/pagerank-levelwise-skip-teleport
-[compute-5M]: https://github.com/puzzlef/pagerank-levelwise-cuda-adjust-compute-size
+[pull]: https://github.com/puzzlef/pagerank
+[CSR]: https://github.com/puzzlef/pagerank
+[skip-teleport]: https://github.com/puzzlef/pagerank-levelwise
+[compute-5M]: https://github.com/puzzlef/pagerank-levelwise-cuda
+[gist]: https://gist.github.com/wolfram77/cc0ef7ced4db4781ab64feae55b3a537
 [charts]: https://photos.app.goo.gl/xeZWBbSgBcCMDhDBA
 [sheets]: https://docs.google.com/spreadsheets/d/1OMmcMTKi9TYyhyZBZjP9c7sceMAapPbyn-GW0gngn9k/edit?usp=sharing

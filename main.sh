@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-src="pagerank-cuda-monolithic-vs-levelwise"
+src="pagerank-levelwise-cuda-adjust-component-size"
 out="/home/resources/Documents/subhajit/$src.log"
 ulimit -s unlimited
 printf "" > "$out"

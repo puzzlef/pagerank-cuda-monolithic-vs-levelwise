@@ -1,17 +1,16 @@
-Performance of standard (**monolithic CUDA**) vs topologically-ordered components
-(**levelwise CUDA**) PageRank ([pull], [CSR], [skip-teleport], [compute-5M]).
+Comparing various min. component sizes for topologically-ordered components
+(levelwise) [CUDA] based PageRank ([pull], [CSR]).
 
-This experiment was for comparing performance between:
-1. Find **CUDA** based pagerank with standard algorithm (**monolithic**).
-2. Find **CUDA** based pagerank in topologically-ordered components fashion (**levelwise**).
 
-Both approaches were attempted on different types of graphs, running each
-approach 5 times per graph to get a good time measure. **Levelwise** pagerank
-is the [STIC-D algorithm], without **ICD** optimizations (using single-thread).
-On average, **levelwise** pagerank is **same** performance as the *monolithic*
-approach.
+For this experiment **min. component size** was varied from `1E+2` - `1E+7`.
+Each **min. component size** was attempted on different types of graphs,
+running each size 5 times per graph to get a good time measure. **Levelwise**
+pagerank is the [STIC-D algorithm], without **ICD** optimizations (using
+single-thread). It appears choosing the largest **min. component size**
+is the best, but that would not be useful. So, for the time being,
+**min. component size** is `50000` is chosen.
 
-All outputs are saved in [out](out/) and a small part of the output is listed
+All outputs are saved in [out/](out/) and a small part of the output is listed
 here. All [charts] are also included below, generated from [sheets]. The input
 data used for this experiment is available at ["graphs"] (for small ones), and
 the [SuiteSparse Matrix Collection].
@@ -30,25 +29,25 @@ $ ...
 # order: 281903 size: 2312497 {}
 # order: 281903 size: 2312669 {} (loopDeadEnds)
 # order: 281903 size: 2312669 {} (transposeWithDegree)
-# [00012.078 ms; 000 iters.] [0.0000e+00 err.] pagerankNvgraph
-# [00010.097 ms; 063 iters.] [7.0437e-07 err.] pagerankMonolithic
-# [00009.169 ms; 063 iters.] [7.0437e-07 err.] pagerankLevelwise
-#
-# ...
-#
-# Loading graph /home/subhajit/data/soc-LiveJournal1.mtx ...
-# order: 4847571 size: 68993773 {}
-# order: 4847571 size: 69532892 {} (loopDeadEnds)
-# order: 4847571 size: 69532892 {} (transposeWithDegree)
-# [00165.932 ms; 000 iters.] [0.0000e+00 err.] pagerankNvgraph
-# [00177.466 ms; 058 iters.] [2.6097e-06 err.] pagerankMonolithic
-# [00169.848 ms; 058 iters.] [2.6097e-06 err.] pagerankLevelwise
+# [00011.294 ms; 000 iters.] [0.0000e+00 err.] pagerankNvgraph
+# [00010.037 ms; 063 iters.] [7.0437e-07 err.] pagerankMonolithic
+# [00955.617 ms; 065 iters.] [5.1496e-06 err.] pagerankLevelwise [1e+02 min-component-size]
+# [00324.125 ms; 062 iters.] [4.2335e-06 err.] pagerankLevelwise [5e+02 min-component-size]
+# [00196.761 ms; 067 iters.] [5.5364e-06 err.] pagerankLevelwise [1e+03 min-component-size]
+# [00070.219 ms; 068 iters.] [5.4311e-06 err.] pagerankLevelwise [5e+03 min-component-size]
+# [00031.119 ms; 069 iters.] [4.9487e-06 err.] pagerankLevelwise [1e+04 min-component-size]
+# [00015.097 ms; 070 iters.] [4.3619e-06 err.] pagerankLevelwise [5e+04 min-component-size]
+# [00010.457 ms; 064 iters.] [1.9684e-06 err.] pagerankLevelwise [1e+05 min-component-size]
 #
 # ...
 ```
 
-[![](https://i.imgur.com/2K0WuWu.gif)][sheets]
-[![](https://i.imgur.com/wn0Od0x.gif)][sheets]
+<br>
+
+[![](https://i.imgur.com/kohs9Ov.png)][sheets]
+[![](https://i.imgur.com/eHwowMX.png)][sheets]
+[![](https://i.imgur.com/PjrAfeK.png)][sheets]
+[![](https://i.imgur.com/8bZtchZ.png)][sheets]
 
 <br>
 <br>
@@ -63,14 +62,12 @@ $ ...
 <br>
 <br>
 
-[![](https://i.imgur.com/uF80zAS.jpg)](https://www.youtube.com/watch?v=riC9mRFp1ig)
+[![](https://i.imgur.com/y1Q1Fzy.jpg)](https://www.youtube.com/watch?v=vbXTZlJ5fHU)
 
 [SuiteSparse Matrix Collection]: https://suitesparse-collection-website.herokuapp.com
 [STIC-D algorithm]: https://www.slideshare.net/SubhajitSahu/sticd-algorithmic-techniques-for-efficient-parallel-pagerank-computation-on-realworld-graphs
 ["graphs"]: https://github.com/puzzlef/graphs
 [pull]: https://github.com/puzzlef/pagerank-push-vs-pull
 [CSR]: https://github.com/puzzlef/pagerank-class-vs-csr
-[skip-teleport]: https://github.com/puzzlef/pagerank-levelwise-skip-teleport
-[compute-5M]: https://github.com/puzzlef/pagerank-levelwise-cuda-adjust-compute-size
-[charts]: https://photos.app.goo.gl/xeZWBbSgBcCMDhDBA
-[sheets]: https://docs.google.com/spreadsheets/d/1OMmcMTKi9TYyhyZBZjP9c7sceMAapPbyn-GW0gngn9k/edit?usp=sharing
+[charts]: https://photos.app.goo.gl/KzJK4wMtK9sJLRBWA
+[sheets]: https://docs.google.com/spreadsheets/d/1AvibiNPO1pIC56ZMc16bRQ7E-afvvxGU2V_b7crgz0o/edit?usp=sharing

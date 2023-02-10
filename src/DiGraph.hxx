@@ -23,8 +23,8 @@ class DiGraph {
   private:
   vector<int>  none;
   vector<bool> vex;
-  vector2d<int> vto;
-  vector2d<E> edata;
+  vector<vector<int>> vto;
+  vector<vector<E>> edata;
   vector<V>         vdata;
   int N = 0, M = 0;
 

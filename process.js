@@ -1,9 +1,10 @@
 const fs = require('fs');
 const os = require('os');
+const path = require('path');
 
 const RGRAPH = /^Loading graph .*\/(.*?)\.mtx \.\.\./m;
 const RORDER = /^order: (\d+) size: (\d+) \{\}/m;
-const RRESLT = /^\[(.+?) ms; (\d+) iters\.\] \[(.+?) err\.\] (.+)/m;
+const RRESLT = /^\[(.+?) ms; (\d+) iters\.\] \[(.+?) err\.\] (\w+)(?: \[min-compute=(.+?)\])?/m;
 
 
 
@@ -53,7 +54,7 @@ function readLogLine(ln, data, state) {
     state.size  = parseFloat(size);
   }
   else if (RRESLT.test(ln)) {
-    var [, time, iterations, error, technique] = RRESLT.exec(ln);
+    var [, time, iterations, error, technique, min_compute] = RRESLT.exec(ln);
     data.get(state.graph).push({
       graph: state.graph,
       order: state.order,
@@ -61,7 +62,8 @@ function readLogLine(ln, data, state) {
       time:       parseFloat(time),
       iterations: parseFloat(iterations),
       error:      parseFloat(error),
-      technique:  technique
+      technique:  technique,
+      min_compute: parseFloat(min_compute||'0')
     });
   }
   return state;
@@ -99,10 +101,15 @@ function processCsv(data) {
 
 function main(cmd, log, out) {
   var data = readLog(log);
+  if (path.extname(out)==='') cmd += '-dir';
   switch (cmd) {
     case 'csv':
       var rows = processCsv(data);
       writeCsv(out, rows);
+      break;
+    case 'csv-dir':
+      for (var [graph, rows] of data)
+        writeCsv(path.join(out, graph+'.csv'), rows);
       break;
     default:
       console.error(`error: "${cmd}"?`);

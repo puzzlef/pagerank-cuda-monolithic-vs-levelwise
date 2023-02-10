@@ -10,7 +10,7 @@ single-thread). It appears choosing the largest **min. component size**
 is the best, but that would not be useful. So, for the time being,
 **min. component size** is `50000` is chosen.
 
-All outputs are saved in [out/](out/) and a small part of the output is listed
+All outputs are saved in [gist] and a small part of the output is listed
 here. All [charts] are also included below, generated from [sheets]. The input
 data used for this experiment is available at ["graphs"] (for small ones), and
 the [SuiteSparse Matrix Collection].
@@ -67,7 +67,8 @@ $ ...
 [SuiteSparse Matrix Collection]: https://suitesparse-collection-website.herokuapp.com
 [STIC-D algorithm]: https://www.slideshare.net/SubhajitSahu/sticd-algorithmic-techniques-for-efficient-parallel-pagerank-computation-on-realworld-graphs
 ["graphs"]: https://github.com/puzzlef/graphs
-[pull]: https://github.com/puzzlef/pagerank-push-vs-pull
-[CSR]: https://github.com/puzzlef/pagerank-class-vs-csr
+[pull]: https://github.com/puzzlef/pagerank
+[CSR]: https://github.com/puzzlef/pagerank
+[gist]: https://gist.github.com/wolfram77/d7de9db0d9fb8e81d3092692e30c9e3c
 [charts]: https://photos.app.goo.gl/KzJK4wMtK9sJLRBWA
 [sheets]: https://docs.google.com/spreadsheets/d/1AvibiNPO1pIC56ZMc16bRQ7E-afvvxGU2V_b7crgz0o/edit?usp=sharing

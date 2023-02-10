@@ -44,7 +44,7 @@ constexpr int SWITCH_DEGREE_PRC() noexcept { return 64; }
 template <class T=float>
 constexpr int SWITCH_LIMIT_PRC()  noexcept { return 32; }
 
-// For componentwise pagerank
+// For levelwise pagerank
 template <class T=float>
 constexpr int MIN_COMPUTE_PR()  noexcept { return 1000000; }  // 10
 template <class T=float>

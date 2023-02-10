@@ -15,4 +15,4 @@
 #include "pagerank.hxx"
 #include "pagerankCuda.hxx"
 #include "pagerankMonolithicCuda.hxx"
-#include "pagerankComponentwiseCuda.hxx"
+#include "pagerankLevelwiseCuda.hxx"

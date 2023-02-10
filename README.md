@@ -1,76 +1,80 @@
-Performance of standard (**monolithic CUDA**) vs topologically-ordered components
-(**levelwise CUDA**) PageRank ([pull], [CSR], [skip-teleport], [compute-5M]).
+Design of **CUDA-based** *Levelwise PageRank algorithm* for link analysis.
 
-This experiment was for comparing performance between:
-1. Find **CUDA** based pagerank with standard algorithm (**monolithic**).
-2. Find **CUDA** based pagerank in topologically-ordered components fashion (**levelwise**).
+[Levelwise PageRank] is the [STIC-D algorithm], without **ICD** optimizations.
+We use a rank [pull] based approach, and perform the computation upon the [CSR]
+representation of a graph on the GPU. We skip the computation of common teleport
+contribution to all the vertices in the graph by simply adding self-loops to all
+the vertices ([skip-teleport]). We process each component in a switched
+thread/block-per-vertex fashion, with the vertices partitioned by in-degree. If
+the size of a component is fewer than 5 million vertices, we process multiple
+components together ([compute-5M]) using the switched approach.
 
-Both approaches were attempted on different types of graphs, running each
-approach 5 times per graph to get a good time measure. **Levelwise** pagerank
-is the [STIC-D algorithm], without **ICD** optimizations (using single-thread).
-On average, **levelwise** pagerank is **same** performance as the *monolithic*
+For each experiment, we run all approaches on different types of graphs, running
+each approach 5 times per graph to get a good time measure. The input data used
+for the experiments is available at ["graphs"] (for small ones), and the
+[SuiteSparse Matrix Collection]. Experiments were done with guidance from
+[Prof. Dip Sankar Banerjee] and [Prof. Kishore Kothapalli].
+
+<br>
+
+
+### Adjusting Compute size
+
+We then compare the performance between *Levelwise* CUDA-based PageRank with
+various min. compute size, ranging from `1E+3` to `1E+7` ([adjust-compute-size]).
+As mentioned above, min. compute is the minimum number of components processed
+together in a switch thread/block-per-vertex fashion (using a two CUDA kernel
+calls). From the results, it appears that a *min. compute size* of `5E+6` would
+be a good choice, although there is no clear winner.
+
+[adjust-compute-size]: https://github.com/puzzlef/pagerank-levelwise-cuda/tree/adjust-compute-size
+
+<br>
+
+
+### Comparision with Monolithic approach
+
+In this experiment ([compare-monolithic], [main]), we compare the performance of
+*Monolithic* vs *Levelwise* CUDA-based PageRank. On average, we observe that
+*Levelwise* PageRank has around the *same* performance as the *Monolithic*
 approach.
 
-All outputs are saved in [out](out/) and a small part of the output is listed
-here. All [charts] are also included below, generated from [sheets]. The input
-data used for this experiment is available at ["graphs"] (for small ones), and
-the [SuiteSparse Matrix Collection].
+[compare-monolithic]: https://github.com/puzzlef/pagerank-levelwise-cuda/tree/compare-monolithic
+[main]: https://github.com/puzzlef/pagerank-levelwise-cuda
 
 <br>
 
-```bash
-$ g++ -O3 main.cxx
-$ ./a.out ~/data/min-1DeadEnd.mtx
-$ ./a.out ~/data/min-2SCC.mtx
-$ ...
 
-# ...
-#
-# Loading graph /home/subhajit/data/web-Stanford.mtx ...
-# order: 281903 size: 2312497 {}
-# order: 281903 size: 2312669 {} (loopDeadEnds)
-# order: 281903 size: 2312669 {} (transposeWithDegree)
-# [00012.078 ms; 000 iters.] [0.0000e+00 err.] pagerankNvgraph
-# [00010.097 ms; 063 iters.] [7.0437e-07 err.] pagerankMonolithic
-# [00009.169 ms; 063 iters.] [7.0437e-07 err.] pagerankLevelwise
-#
-# ...
-#
-# Loading graph /home/subhajit/data/soc-LiveJournal1.mtx ...
-# order: 4847571 size: 68993773 {}
-# order: 4847571 size: 69532892 {} (loopDeadEnds)
-# order: 4847571 size: 69532892 {} (transposeWithDegree)
-# [00165.932 ms; 000 iters.] [0.0000e+00 err.] pagerankNvgraph
-# [00177.466 ms; 058 iters.] [2.6097e-06 err.] pagerankMonolithic
-# [00169.848 ms; 058 iters.] [2.6097e-06 err.] pagerankLevelwise
-#
-# ...
-```
+### Other experiments
 
-[![](https://i.imgur.com/2K0WuWu.gif)][sheets]
-[![](https://i.imgur.com/wn0Od0x.gif)][sheets]
+- [adjust-component-size](https://github.com/puzzlef/pagerank-levelwise-cuda/tree/adjust-component-size)
 
-<br>
 <br>
 
 
 ## References
 
 - [STIC-D: algorithmic techniques for efficient parallel pagerank computation on real-world graphs][STIC-D algorithm]
-- [PageRank Algorithm, Mining massive Datasets (CS246), Stanford University](http://snap.stanford.edu/class/cs246-videos-2019/lec9_190205-cs246-720.mp4)
+- [PageRank Algorithm, Mining massive Datasets (CS246), Stanford University](https://www.youtube.com/watch?v=ke9g8hB0MEo)
 - [SuiteSparse Matrix Collection]
+- [Merge git repo into branch of another repo](https://stackoverflow.com/a/21353836/1413259)
 
 <br>
 <br>
 
-[![](https://i.imgur.com/uF80zAS.jpg)](https://www.youtube.com/watch?v=riC9mRFp1ig)
 
+[![](https://img.youtube.com/vi/riC9mRFp1ig/maxresdefault.jpg)](https://www.youtube.com/watch?v=riC9mRFp1ig)
+
+
+[Prof. Dip Sankar Banerjee]: https://sites.google.com/site/dipsankarban/
+[Prof. Kishore Kothapalli]: https://faculty.iiit.ac.in/~kkishore/
+[Levelwise PageRank]: https://ieeexplore.ieee.org/abstract/document/9835216
+[STIC-D algorithm]: https://dl.acm.org/doi/abs/10.1145/2833312.2833322
 [SuiteSparse Matrix Collection]: https://suitesparse-collection-website.herokuapp.com
-[STIC-D algorithm]: https://www.slideshare.net/SubhajitSahu/sticd-algorithmic-techniques-for-efficient-parallel-pagerank-computation-on-realworld-graphs
 ["graphs"]: https://github.com/puzzlef/graphs
-[pull]: https://github.com/puzzlef/pagerank-push-vs-pull
-[CSR]: https://github.com/puzzlef/pagerank-class-vs-csr
-[skip-teleport]: https://github.com/puzzlef/pagerank-levelwise-skip-teleport
-[compute-5M]: https://github.com/puzzlef/pagerank-levelwise-cuda-adjust-compute-size
+[pull]: https://github.com/puzzlef/pagerank
+[CSR]: https://github.com/puzzlef/pagerank
+[skip-teleport]: https://github.com/puzzlef/pagerank-levelwise
+[compute-5M]: https://github.com/puzzlef/pagerank-levelwise-cuda
 [charts]: https://photos.app.goo.gl/xeZWBbSgBcCMDhDBA
 [sheets]: https://docs.google.com/spreadsheets/d/1OMmcMTKi9TYyhyZBZjP9c7sceMAapPbyn-GW0gngn9k/edit?usp=sharing
